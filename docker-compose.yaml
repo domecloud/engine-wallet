@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16.3
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+  redis:
+    image: redis:latest
+    restart: always
+    volumes:
+      - ./redis:/root/redis
+  engine:
+    image: thirdweb/engine:latest
+    restart: always
+    ports:
+      - "3005:3005"
+    env_file:
+      - ./.env
+      
